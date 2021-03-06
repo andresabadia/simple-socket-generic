@@ -1,0 +1,25 @@
+{
+    "name": "simple-socket-generic",
+    "version": "1.0.0",
+    "description": "generict simple socket connection",
+    "main": "app.js",
+    "scripts": {
+        "serve": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/andresabadia/simple-socket-generic.git"
+    },
+    "author": "Andres Abadia",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/andresabadia/simple-socket-generic/issues"
+    },
+    "homepage": "https://github.com/andresabadia/simple-socket-generic#readme",
+    "devDependencies": {
+        "nodemon": "^2.0.7"
+    },
+    "dependencies": {
+        "ws": "^7.4.4"
+    }
+}
