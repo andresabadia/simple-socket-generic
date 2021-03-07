@@ -7,6 +7,7 @@ class ChannelItem {
 
     constructor(taxiId, channelIds, ws) {
         this.taxiId = taxiId;
+        this.channelIds = channelIds;
         this.ws = ws;
     }
 }

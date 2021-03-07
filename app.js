@@ -13,32 +13,35 @@ wss.on("connection", (ws) => {
     ws.on("message", (message) => {
         console.log(message);
         const incommingMessage = new IncommingMessage(message);
-
-        if (incommingMessage.type === 0) {
-            channelManager.processIncommingChannelItem(
-                incommingMessage.body,
-                ws
-            );
-            ws.send(
-                JSON.stringify({
-                    type: 0,
-                    channels: channelManager.channels,
-                    channelItemList: channelManager.channelItemList,
-                })
-            );
-        } else if (incommingMessage.type === 1) {
-            incommingMessage.body.channelIds.forEach((channelId) => {
-                const channel = channelManager.channels.find(
-                    (c) => c.channelId === channelId
+        try {
+            if (incommingMessage.type === 0) {
+                channelManager.processIncommingChannelItem(
+                    incommingMessage.body,
+                    ws
                 );
-                if (channel) {
-                    channel.channelItems.forEach((channelItem) => {
-                        channelItem.ws.send(incommingMessage.body.csv);
-                    });
-                }
-            });
-        } else if (incommingMessage.type === 2) {
-            ws.send("Connected to Server");
+                ws.send(
+                    JSON.stringify({
+                        type: 0,
+                        channels: channelManager.channels,
+                        channelItemList: channelManager.channelItemList,
+                    })
+                );
+            } else if (incommingMessage.type === 1) {
+                incommingMessage.body.channelIds.forEach((channelId) => {
+                    const channel = channelManager.channels.find(
+                        (c) => c.channelId === channelId
+                    );
+                    if (channel) {
+                        channel.channelItems.forEach((channelItem) => {
+                            channelItem.ws.send(incommingMessage.body.csv);
+                        });
+                    }
+                });
+            } else if (incommingMessage.type === 2) {
+                ws.send("Connected to Server");
+            }
+        } catch {
+            ws.send("Your Message is not allowed");
         }
     });
 });
