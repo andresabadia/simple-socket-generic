@@ -4,12 +4,8 @@ class IncommingMessage {
     body;
 
     constructor(incommingMessage) {
-        if (this.isJsonString(incommingMessage)) {
-            const incommingMessageObject = JSON.parse(incommingMessage);
-            Object.assign(this, incommingMessageObject);
-        } else {
-            console.log(incommingMessage);
-        }
+        const incommingMessageObject = JSON.parse(incommingMessage);
+        Object.assign(this, incommingMessageObject);
     }
 
     isJsonString(str) {

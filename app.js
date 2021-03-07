@@ -12,8 +12,8 @@ const channelManager = new ChannelManager();
 wss.on("connection", (ws) => {
     ws.on("message", (message) => {
         console.log(message);
-        const incommingMessage = new IncommingMessage(message);
         try {
+            const incommingMessage = new IncommingMessage(message);
             if (incommingMessage.type === 0) {
                 channelManager.processIncommingChannelItem(
                     incommingMessage.body,
@@ -41,7 +41,7 @@ wss.on("connection", (ws) => {
                 ws.send("Connected to Server");
             }
         } catch {
-            ws.send("Your Message is not allowed");
+            ws.send("Server: Your Message is not allowed");
         }
     });
 });
